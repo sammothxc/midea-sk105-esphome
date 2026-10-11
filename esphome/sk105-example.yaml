@@ -3,6 +3,9 @@ esphome:
   friendly_name: SK105
   platformio_options:
     lib_compat_mode: "off"   # MideaUART's manifest only declares Espressif
+    build_flags:
+      - -DPIN_SERIAL0_RX=13u
+      - -DPIN_SERIAL0_TX=14u
 
 rtl87xx:
   board: generic-rtl8720cf-2mb-992k   # some SK10x might be 896k; match the stock partition layout

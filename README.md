@@ -43,6 +43,9 @@ esphome:
   friendly_name: SK105
   platformio_options:
     lib_compat_mode: "off"   # MideaUART's manifest only declares Espressif
+    build_flags:
+      - -DPIN_SERIAL0_RX=13u
+      - -DPIN_SERIAL0_TX=14u
 
 rtl87xx:
   board: generic-rtl8720cf-2mb-992k   # some SK10x might be 896k; match the stock partition layout
@@ -85,4 +88,4 @@ climate:
 ```
 
 ### Flashing Firmware
-Flashing is as simple as entering download mode as mentioned above (hold `A0` at 3.3v during boot), and then running `ltchiptool flash write firmware.uf2`.
+Compile and download the `firmware.uf2` binary from ESPHome. Flashing is as simple as entering download mode as mentioned above (hold `A0` at 3.3v during boot), and then running `ltchiptool flash write firmware.uf2`.
