@@ -88,4 +88,4 @@ climate:
 ```
 
 ### Flashing Firmware
-Compile and download the `firmware.uf2` binary from ESPHome. Flashing is as simple as entering download mode as mentioned above (hold `A0` at 3.3v during boot), and then running `ltchiptool flash write firmware.uf2`.
+Compile and download the `firmware.uf2` binary from ESPHome. Flashing is as simple as entering download mode as mentioned above (hold `A0` at 3.3v during boot), and then running `ltchiptool flash write firmware.uf2`. Once ESHome is flashed once and you have OTA enabled in the YAML, OTA should work just fine.
