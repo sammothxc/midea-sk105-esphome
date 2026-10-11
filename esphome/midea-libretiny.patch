@@ -1,0 +1,101 @@
+Binary files midea.orig/__pycache__/climate.cpython-314.pyc and components/midea/__pycache__/climate.cpython-314.pyc differ
+diff -ru midea.orig/ac_adapter.cpp components/midea/ac_adapter.cpp
+--- midea.orig/ac_adapter.cpp   2026-09-29 13:12:30.000000000 -0600
++++ components/midea/ac_adapter.cpp     2026-10-11 00:23:49.371700970 -0600
+@@ -1,4 +1,4 @@
+-#if (defined(USE_ARDUINO) && !defined(USE_RP2) && !defined(USE_LIBRETINY)) || defined(USE_ESP_IDF)
++#if (defined(USE_ARDUINO) && !defined(USE_RP2)) || defined(USE_ESP_IDF)
+ 
+ #include "esphome/core/log.h"
+ #include "ac_adapter.h"
+diff -ru midea.orig/ac_adapter.h components/midea/ac_adapter.h
+--- midea.orig/ac_adapter.h     2026-09-29 13:12:30.000000000 -0600
++++ components/midea/ac_adapter.h       2026-10-11 00:23:49.371700970 -0600
+@@ -1,6 +1,6 @@
+ #pragma once
+ 
+-#if (defined(USE_ARDUINO) && !defined(USE_RP2) && !defined(USE_LIBRETINY)) || defined(USE_ESP_IDF)
++#if (defined(USE_ARDUINO) && !defined(USE_RP2)) || defined(USE_ESP_IDF)
+ 
+ // MideaUART
+ #include <Appliance/AirConditioner/AirConditioner.h>
+diff -ru midea.orig/ac_automations.h components/midea/ac_automations.h
+--- midea.orig/ac_automations.h 2026-09-29 13:12:30.000000000 -0600
++++ components/midea/ac_automations.h   2026-10-11 00:23:49.371700970 -0600
+@@ -1,6 +1,6 @@
+ #pragma once
+ 
+-#if (defined(USE_ARDUINO) && !defined(USE_RP2) && !defined(USE_LIBRETINY)) || defined(USE_ESP_IDF)
++#if (defined(USE_ARDUINO) && !defined(USE_RP2)) || defined(USE_ESP_IDF)
+ 
+ #include "esphome/core/automation.h"
+ #include "air_conditioner.h"
+diff -ru midea.orig/air_conditioner.cpp components/midea/air_conditioner.cpp
+--- midea.orig/air_conditioner.cpp      2026-09-29 13:12:30.000000000 -0600
++++ components/midea/air_conditioner.cpp        2026-10-11 00:23:49.371700970 -0600
+@@ -1,4 +1,4 @@
+-#if (defined(USE_ARDUINO) && !defined(USE_RP2) && !defined(USE_LIBRETINY)) || defined(USE_ESP_IDF)
++#if (defined(USE_ARDUINO) && !defined(USE_RP2)) || defined(USE_ESP_IDF)
+ 
+ #include "esphome/core/helpers.h"
+ #include "esphome/core/log.h"
+diff -ru midea.orig/air_conditioner.h components/midea/air_conditioner.h
+--- midea.orig/air_conditioner.h        2026-09-29 13:12:30.000000000 -0600
++++ components/midea/air_conditioner.h  2026-10-11 00:23:49.371700970 -0600
+@@ -1,6 +1,6 @@
+ #pragma once
+ 
+-#if (defined(USE_ARDUINO) && !defined(USE_RP2) && !defined(USE_LIBRETINY)) || defined(USE_ESP_IDF)
++#if (defined(USE_ARDUINO) && !defined(USE_RP2)) || defined(USE_ESP_IDF)
+ 
+ // MideaUART
+ #include <Appliance/AirConditioner/AirConditioner.h>
+diff -ru midea.orig/appliance_base.h components/midea/appliance_base.h
+--- midea.orig/appliance_base.h 2026-09-29 13:12:30.000000000 -0600
++++ components/midea/appliance_base.h   2026-10-11 00:23:49.371700970 -0600
+@@ -1,6 +1,6 @@
+ #pragma once
+ 
+-#if (defined(USE_ARDUINO) && !defined(USE_RP2) && !defined(USE_LIBRETINY)) || defined(USE_ESP_IDF)
++#if (defined(USE_ARDUINO) && !defined(USE_RP2)) || defined(USE_ESP_IDF)
+ 
+ // MideaUART
+ #include <Appliance/ApplianceBase.h>
+diff -ru midea.orig/climate.py components/midea/climate.py
+--- midea.orig/climate.py       2026-09-29 13:12:30.000000000 -0600
++++ components/midea/climate.py 2026-10-11 00:33:15.372490397 -0600
+@@ -153,12 +153,6 @@
+     )
+     .extend(uart.UART_DEVICE_SCHEMA)
+     .extend(cv.COMPONENT_SCHEMA),
+-    cv.only_on(
+-        [
+-            PLATFORM_ESP32,
+-            PLATFORM_ESP8266,
+-        ]
+-    ),
+ )
+ 
+ # Actions
+@@ -310,8 +304,4 @@
+     if CORE.is_esp32 and CORE.using_arduino:
+         cg.add_library("WiFi", None)
+     # Using the repository until a release containing ESP-IDF support is published
+-    cg.add_library(
+-        name="MideaUART",
+-        version=None,
+-        repository="https://github.com/dudanov/MideaUART.git#eeea6c3e9b4474f067054592b435be1c4e466815",
+-    )
++    cg.add_library("MideaUART", None, "symlink:///config/libs/MideaUART")
+diff -ru midea.orig/ir_transmitter.h components/midea/ir_transmitter.h
+--- midea.orig/ir_transmitter.h 2026-09-29 13:12:30.000000000 -0600
++++ components/midea/ir_transmitter.h   2026-10-11 00:23:49.371700970 -0600
+@@ -1,6 +1,6 @@
+ #pragma once
+ 
+-#if (defined(USE_ARDUINO) && !defined(USE_RP2) && !defined(USE_LIBRETINY)) || defined(USE_ESP_IDF)
++#if (defined(USE_ARDUINO) && !defined(USE_RP2)) || defined(USE_ESP_IDF)
+ #ifdef USE_REMOTE_TRANSMITTER
+ #include "esphome/components/remote_base/midea_protocol.h"
+ 
+

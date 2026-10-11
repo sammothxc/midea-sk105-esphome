@@ -1,7 +1,7 @@
 # midea-sk105-esphome
 How to get the stock Midea SK105 working with ESPHome. 
 
-*Note: These commands were done on Debian 13, YMMV if using a different OS.*
+*Note: This was done on Debian 13, ESPHome 2026.9.1, and LibreTiny 1.13.0. YMMV.*
 
 ### Hardware
 The Midea Smart Kit SK105 module found in many Midea AC units is based around the RTL8720C.
@@ -28,7 +28,11 @@ The first thing I did was read and backup the stock firmware. To do this, the de
 
 and the third location being the test point on the bottom labelled `CLK`; I held `A0` via `CLK` using the 3.3v from my serial adapter. First hold pin `A0` at 3.3v, then connect the board to power. I powered mine from the test pads near the USB on the bottom labelled `5v` and `GND` from a benchtop power supply. I held `A0` for only about a second and that seemed to work. After the device is in download mode, run `ltchiptool flash read realtek-ambz2 sk105_stock.bin`. A copy of the firmware dump is available [here](./sk105_stock_firmware_dump.bin).
 
+#### SECURITY NOTE!
+With the stock firmware, the unauthenticated UART console exposes stored Wi-Fi credentials. Those credentials are also stored plaintext in the firmware dump!
+
 ### Patching ESPHome
+There are 2 main edits: one to remove a Python platform gate that only allows ESP32 or ESP8266 platforms and adding a vendored lib, and the second set of edits removes some C++ guards that explicitly excludes LibreTiny in MideaUART. Both patch diffs are found [here](./esphome).
 
 ### Example ESPHome YAML
 [This](./esphome/sk105-example.yaml) is a generalized version of the YAML that I flashed my SK105 with:
