@@ -26,12 +26,12 @@ The first thing I did was read and backup the stock firmware. To do this, the de
 ![Pin A0](./img/pin-a0.jpg)
 > Thanks [panzerknacker20111](https://github.com/libretiny-eu/ltchiptool/issues/18#issuecomment-2923657454)!
 
-and the third location being the test point on the bottom labelled `CLK`; I held `A0` via `CLK` using the 3.3v from my serial adapter. First hold pin `A0` at 3.3v, then connect the board to power. I powered mine from the test pads near the USB on the bottom labelled `5v` and `GND` from a benchtop power supply. I held `A0` for only about a second and that seemed to work. After the device is in download mode, run `ltchiptool flash read realtek-ambz2 sk105_stock.bin`.
+and the third location being the test point on the bottom labelled `CLK`; I held `A0` via `CLK` using the 3.3v from my serial adapter. First hold pin `A0` at 3.3v, then connect the board to power. I powered mine from the test pads near the USB on the bottom labelled `5v` and `GND` from a benchtop power supply. I held `A0` for only about a second and that seemed to work. After the device is in download mode, run `ltchiptool flash read realtek-ambz2 sk105_stock.bin`. A copy of the firmware dump is available [here](./sk105_stock_firmware_dump.bin).
 
 ### Patching ESPHome
 
 ### Example ESPHome YAML
-This is a generalized version of the YAML that I flashed my SK105 with:
+[This](./esphome/sk105-example.yaml) is a generalized version of the YAML that I flashed my SK105 with:
 
 ```yaml
 esphome:
